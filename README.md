@@ -1,12 +1,32 @@
-# React + Vite
+🎬 IMDb-Inspired Movie App (ReactJS + Netlify)
+A dynamic, single-page movie web application built using ReactJS, replicating core IMDb functionalities. This project showcases key front-end skills including authentication, state management, and client-side routing.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔧 Features:
+User Authentication: Registration, Login, and Logout functionality with session handling via localStorage.
 
-Currently, two official plugins are available:
+Protected Routes: Only logged-in users can access core pages like Movies and Watchlist.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Movies Page: Browse through a list of movies with the ability to add them to a watchlist.
 
-## Expanding the ESLint configuration
+Watchlist Page: View and manage a personalized list of saved movies.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Responsive UI: Clean, mobile-friendly layout styled using Tailwind CSS.
+
+React Context API: Used for global state management (user credentials, login status, movie data).
+
+Routing: Managed via React Router for smooth navigation between pages.
+
+Deployed on Netlify: Live and accessible on the web with fast performance and zero backend dependencies.
+
+🌐 Tech Stack:
+ReactJS
+
+React Router
+
+Context API
+
+Tailwind CSS
+
+Netlify (Deployment)
+
+🔗 [Live Demo](https://lovely-tarsier-6b5e7b.netlify.app/login)
