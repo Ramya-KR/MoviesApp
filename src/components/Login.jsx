@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppDataContext } from "../context/AppDataContext";
 import { useNavigate } from "react-router";
+import bcrypt from "bcryptjs";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,11 +19,11 @@ const Login = () => {
   };
   const handleLogin = (e) => {
     e.preventDefault();
-    const existingUser = JSON.parse(localStorage.getItem("user"));
+    const existingUser = JSON.parse(localStorage.getItem("user")).find(user => user.username === userName);
     if (
       existingUser &&
       existingUser.username === userName &&
-      existingUser.password === password
+      bcrypt.compareSync(password, existingUser.encryptedPassword)
     ) {
       localStorage.setItem("isLoggedIn", "true");
       setLoggedIn(true)
@@ -42,19 +43,19 @@ const Login = () => {
     }
   }, [error]);
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-[#add8e6]">
-      <div className="p-10 text-center text-2xl text-gray-600"> Login</div>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="p-5 text-center text-2xl text-white font-serif"> Login</div>
       <form onSubmit={handleLogin}>
         <div className="flex flex-col justify-center items-center">
-          <div className="p-4 font-medium text-lg">USERNAME</div>
+          <div className="p-4 text-lg">Username</div>
           <input
             type="text"
-            placeholder="Enter Your UserName"
+            placeholder="Enter username"
             onChange={handleUserName}
             value={userName}
             className="h-[3rem] w-[18rem] bg-gray-100 outline-none px-3"
           />
-          <div className="p-4 font-medium text-lg">PASSWORD</div>
+          <div className="p-4 text-lg">Password</div>
           <input
             type="password"
             placeholder="Enter password"
@@ -71,8 +72,8 @@ const Login = () => {
         </div>
       </form>
       {error && <div className="text-red-500">{error}</div>}
-      <div onClick={() => navigate("/register")} className="cursor-pointer">
-        New User?
+      <div onClick={() => navigate("/register")} className="cursor-pointer text-fuchsia-100">
+        New User? Register here
       </div>
     </div>
   );
