@@ -29,4 +29,4 @@ Tailwind CSS
 
 Netlify (Deployment)
 
-🔗 [Live Demo](https://lovely-tarsier-6b5e7b.netlify.app/login)
+🔗 [Live Demo](https://filmy-updates-webapp.netlify.app/)
