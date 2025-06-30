@@ -81,7 +81,7 @@ const WatchList = () => {
         />
       </div>
       <div className="m-8 border border-gray-200 rounded overflow-hidden">
-        <table className="w-full text-gray-500 text-center">
+        <table className="w-full text-gray-800 text-center">
           <thead className="border-b-2">
             <tr>
               <th>Name</th>
@@ -108,7 +108,7 @@ const WatchList = () => {
               <th>Genre</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-white">
             {watchlist
             .filter(movie => {
               if(activeGenre === 'All Genres'){
@@ -133,7 +133,7 @@ const WatchList = () => {
                     <td>{movie.popularity}</td>
                     <td>{genres[movie.genre_ids[0]]}</td>
                     <td
-                      className="text-red-800 hover:cursor-pointer"
+                      className="text-red-500 hover:cursor-pointer"
                       onClick={() => handleDeleteFromWatchlist(movie)}
                     >
                       Delete

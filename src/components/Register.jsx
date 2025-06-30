@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import bcrypt, { genSaltSync } from "bcryptjs";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -10,6 +11,7 @@ const Register = () => {
 
   const navigate = useNavigate();
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validatePassword = (password) => /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/.test(password)
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -23,8 +25,8 @@ const Register = () => {
       return;
     }
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+    if (!validatePassword(password)) {
+      setError("Minimum length of password is 8 and should contain atleast one uppercase, one lowercase letter and one special character ");
       return;
     }
 
@@ -32,8 +34,11 @@ const Register = () => {
       setError("Passwords do not match, please enter correctly");
       return;
     }
-    const user = { username, email, password };
-    localStorage.setItem("user", JSON.stringify(user));
+    const encryptedPassword = bcrypt.hashSync(password, genSaltSync(10))
+    const newUser = { username, email, encryptedPassword };
+    const existingUsers = JSON.parse(localStorage.getItem("user")) || []
+    const users = [...existingUsers, newUser]
+    localStorage.setItem("user", JSON.stringify(users));
     navigate("/");
 
     setEmail("");
@@ -50,8 +55,8 @@ const Register = () => {
     }
   }, [error]);
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-[#add8e6]">
-      <div className="p-10 text-center text-2xl text-gray-600">Register</div>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="p-10 text-center text-2xl text-white font-serif">Register</div>
       <form onSubmit={handleRegister}>
         <div className="flex flex-col justify-center items-center">
           <div className="p-4 font-medium text-lg">Username</div>
@@ -94,7 +99,7 @@ const Register = () => {
           </button>
         </div>
       </form>
-      {error && <div className="text-red-500">{error}</div>}
+      {error && <div className="text-red-500 bg-orange-50">{error}</div>}
     </div>
   );
 };
