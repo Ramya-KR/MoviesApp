@@ -51,7 +51,8 @@ const WatchList = () => {
     let genrelist = watchlist.map((movie) => {
       return genres[movie.genre_ids[0]];
     });
-    genrelist = new Set(genrelist);
+    genrelist = new Set(genrelist.filter((item) => item !== undefined && item !== "" ));
+    console.log(genrelist)
     setGenreList(["All Genres", ...genrelist]);
   }, [watchlist]);
 
